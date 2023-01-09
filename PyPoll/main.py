@@ -1,5 +1,6 @@
 import csv
 import os
+import shutil
 
 csvpath = os.path.join("Resources","election_data.csv")
 
@@ -43,3 +44,8 @@ Winner: {Winner}
 ___________________________________"""
 
 print(printresults)
+
+PyPolltxt = os.path.join("analysis")
+with open("PyPoll.txt", "w") as f:
+    f.write(printresults)
+

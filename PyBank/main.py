@@ -27,9 +27,10 @@ with open(pybank_csv) as csvfile:
     for row in csvreader:
         total_month_count += 1
         total_profit = total_profit + float(row[1])
+        
         current_loss_gain = float(row[1])
         change_total = current_loss_gain - prior_loss_gain
-        prior_loss_gain = change_total
+        prior_loss_gain = current_loss_gain
         rolling_change_total = rolling_change_total + change_total
 
         if change_total > greatestincrease:
