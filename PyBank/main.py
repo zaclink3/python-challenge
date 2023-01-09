@@ -17,36 +17,34 @@ with open(pybank_csv) as csvfile:
     month_of_decrease = 0
     total_profit = 0
     total_month_count = 0
-    change_average = 0
-    change_difference = 0
+    prior_loss_gain = 0
+    current_loss_gain = 0
     change_total = 0
-    change_total_average = 0
+    rolling_change_total = 0
     next(csvreader)
     
 
     for row in csvreader:
         total_month_count += 1
         total_profit = total_profit + float(row[1])
-        change_difference = change_total
-        change_total = change_difference + float(row [1]) 
-        change_total_average = change_total - change_difference
+        current_loss_gain = float(row[1])
+        change_total = current_loss_gain - prior_loss_gain
+        prior_loss_gain = change_total
+        rolling_change_total = rolling_change_total + change_total
 
-        if change_total_average > greatestincrease:
-            greatestincrease = change_total_average
+        if change_total > greatestincrease:
+            greatestincrease = change_total
             month_of_increase = row [0]
-        elif change_total_average < greatestdecrease:
-            greatestdecrease = change_total_average
+        elif change_total < greatestdecrease:
+            greatestdecrease = change_total
             month_of_decrease = row [0]
 
-print(greatestdecrease)
-print(greatestincrease)
-print(change_total_average)
 
-#print("Total Months:", len(month))
-#print("Total:", sum(profit_losses))
-#print("Average Change:", sum(change_pl)/len(change_pl))
-#print(f'Greatest increase in profit: {month_of_increase} , ({greatestincrease})')
-#print(f'Greatest decrease in profit: {month_of_decrease} , ({greatestdecrease})')
+print("Total Months:", total_month_count)
+print("Total:", total_profit)
+print("Average Change:", rolling_change_total/total_month_count)
+print("Greatest increase in profits:", month_of_increase, greatestincrease)
+print("Greatest decrease in profits:", month_of_decrease, greatestdecrease)
      
 
 

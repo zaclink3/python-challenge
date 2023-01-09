@@ -4,7 +4,7 @@ import os
 csvpath = os.path.join("Resources","election_data.csv")
 
 with open(csvpath) as csvfile:
-    csv_reader = csv.reader(csvfile, delimeter=",")
+    csv_reader = csv.reader(csvfile)
     
     total_votes_count = -1
 
