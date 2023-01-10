@@ -1,6 +1,5 @@
 import csv
 import os
-import shutil
 
 csvpath = os.path.join("Resources","election_data.csv")
 
