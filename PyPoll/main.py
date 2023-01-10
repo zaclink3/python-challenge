@@ -45,7 +45,6 @@ ___________________________________"""
 
 print(printresults)
 
-PyPolltxt = os.path.join("analysis")
-with open("PyPoll.txt", "w") as f:
+textfile = os.path.join("analysis","PyPoll.txt")
+with open(textfile, "w") as f:
     f.write(printresults)
-
