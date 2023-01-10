@@ -27,7 +27,7 @@ with open(pybank_csv) as csvfile:
     for row in csvreader:
         total_month_count += 1
         total_profit = total_profit + float(row[1])
-        
+
         current_loss_gain = float(row[1])
         change_total = current_loss_gain - prior_loss_gain
         prior_loss_gain = current_loss_gain
@@ -40,12 +40,18 @@ with open(pybank_csv) as csvfile:
             greatestdecrease = change_total
             month_of_decrease = row [0]
 
+average_change = rolling_change_total / total_month_count
 
-print("Total Months:", total_month_count)
-print("Total:", total_profit)
-print("Average Change:", rolling_change_total/total_month_count)
-print("Greatest increase in profits:", month_of_increase, greatestincrease)
-print("Greatest decrease in profits:", month_of_decrease, greatestdecrease)
+printresults = f"""
+
+Total Months: {total_month_count}
+Total: {total_profit}
+Average Change: {average_change}
+Greatest increase in profits: {month_of_increase}, {greatestincrease}
+Greatest decrease in profits: {month_of_decrease}, {greatestdecrease}"""
      
+print(printresults)
 
-
+textfile = os.path.join("analysis","PyBank.txt")
+with open(textfile, "w") as f:
+    f.write(printresults)
